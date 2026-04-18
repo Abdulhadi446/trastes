@@ -64,8 +64,16 @@ def tests_file(filename):
 # Chat API endpoint
 API_URL = "https://sodeom.com/v1/chat/completions"
 
-@app.route('/chat', methods=['POST'])
+@app.route('/chat', methods=['GET', 'POST', 'OPTIONS'])
+@app.route('/grade', methods=['GET', 'POST', 'OPTIONS'])
 def chat():
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
     data = request.json
     try:
         resp = requests.post(API_URL, json={
@@ -78,7 +86,7 @@ def chat():
         return jsonify({"error": str(e)}), 500
 
 # Make quiz work without API
-@app.route('/grade', methods=['POST'])
+@app.route('/grade', methods=['GET', 'POST', 'OPTIONS'])
 def grade():
     data = request.json
     answers = data.get('answers', {})
