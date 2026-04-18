@@ -5,6 +5,7 @@ Run: python server.py
 from flask import Flask, send_from_directory, request, jsonify, make_response
 import requests
 import os
+import json
 
 app = Flask(__name__)
 
@@ -98,40 +99,52 @@ def generate_test():
     data = request.json or {}
     subject = data.get('subject', 'English')
     
-    prompt = f"""Generate a Class IX {subject} test with EXACTLY 10 questions in this JSON format:
+    # Subject-specific topics based on learning materials
+    topic_contexts = {
+        "English": """Use these English topics for Class IX: Comprehension (passage reading), Verbs (types: intransitive/transitive, auxiliary, regular/irregular), Essay Writing (using adjectives, descriptive writing), Letter/Application (formal vs informal), Idioms and Phrases (meanings and usage), Active and Passive Voice, Do as Directed (sentence transformation), Transformation of Sentences (degrees, voice).""",
+        "Mathematics": """Use these Maths topics for Class IX: Sets (definitions, Venn diagrams, union/intersection), Square Root (methods, simplification), Factorization (using common factors, difference of squares), Brackets (removing/distributing), Simplify Questions (BODMAS), Area and Volume (formulas for rectangle, triangle, circle, cube, cuboid), MCQs, Fill in the Blanks.""",
+        "Science": """Use these Science topics for Class IX: Chemicals (elements, compounds, formulas, periodic table basics), Photosynthesis (process, light-dependent reactions, chlorophyll), Properties (physical vs chemical, states of matter), Define Terms (atoms, molecules, elements, compounds), Fill in the Blanks.""",
+        "Urdu": """Use these Urdu topics for Class IX: Hum Qafia Alfaz (racting letters), Muzakar Muannath (gender), Malomat Aama (general information), Darkhwast (request writing), Muzoon Nigari (dotting), Mahawrey (synonyms), Z arb-AlAmthal (proverbs), Tashbeeh Alfaz (similar words), Sawaqe Lahiqe (idioms)."""
+    }
+    
+    topics = topic_contexts.get(subject, topic_contexts["English"])
+    
+    prompt = f"""Generate a Class IX {subject} test with EXACTLY 10 questions based on these learning materials:
+{topics}
 
+JSON format:
 {{
   "questions": [
     {{
       "type": "mcq",
-      "question": "Question text here?",
+      "question": "Question from above topics?",
       "options": ["a) Option A", "b) Option B", "c) Option C", "d) Option D"],
       "correct": "a"
     }},
     {{
       "type": "fill",
-      "question": "The capital of France is ___.",
-      "correct": "Paris"
+      "question": "Fill in the blank from above topics: ___",
+      "correct": "answer"
     }},
     {{
       "type": "short",
-      "question": "What is photosynthesis?",
-      "correct": "The process by which plants convert sunlight into food using chlorophyll."
+      "question": "Short answer question (2-3 sentences)",
+      "correct": "Model answer"
     }},
     {{
       "type": "long",
-      "question": "Write an essay on 'The Importance of Education' (100-150 words)",
-      "correct": "Essay should cover: education empowers individuals, develops critical thinking, creates opportunities, builds society."
+      "question": "Long answer/essay question (50-100 words)",
+      "correct": "Model essay"
     }}
   ]
 }}
 
 Rules:
-- Include 3 MCQs, 3 Fill-in-blanks, 2 Short answer, 2 Long answer
-- Make questions appropriate for Class IX (14-15 year olds)
-- For mcq: correct answer should be just the letter (a, b, c, or d)
-- For fill/short/long: provide a model answer
-- Return ONLY valid JSON, no explanation
+- 3 MCQs, 3 Fill-in-blanks, 2 Short answer, 2 Long answer
+- Questions MUST be from the {subject} topics listed above
+- Class IX level (14-15 years)
+- MCQ correct = letter (a/b/c/d), others = model answer
+- Return ONLY valid JSON
 """
     
     try:
@@ -141,7 +154,6 @@ Rules:
             "max_tokens": 2000
         }, timeout=60)
         content = resp.json()['choices'][0]['message']['content']
-        import json
         import re
         match = re.search(r'\{[\s\S]*\}', content)
         if match:
@@ -198,7 +210,6 @@ Grading rules:
             "max_tokens": 1000
         }, timeout=60)
         content = resp.json()['choices'][0]['message']['content']
-        import json
         import re
         match = re.search(r'\{[\s\S]*\}', content)
         if match:
