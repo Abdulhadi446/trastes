@@ -96,6 +96,7 @@ if __name__ == '__main__':
     print("🚀 St. George's School Learning Server")
     print("=" * 40)
     print("🌐 Open: http://localhost:5000")
+    print("   Or: http://0.0.0.0:5000")
     print("📚 Available routes:")
     print("   /              - Main page")
     print("   /english/      - English topics")
@@ -105,4 +106,4 @@ if __name__ == '__main__':
     print("   /tests/        - Test papers")
     print("   /chat         - AI chat")
     print("=" * 40)
-    app.run(port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
