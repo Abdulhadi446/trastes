@@ -85,6 +85,129 @@ def chat():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Generate dynamic test
+@app.route('/generate-test', methods=['GET', 'POST', 'OPTIONS'])
+def generate_test():
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    data = request.json or {}
+    subject = data.get('subject', 'English')
+    
+    prompt = f"""Generate a Class IX {subject} test with EXACTLY 10 questions in this JSON format:
+
+{{
+  "questions": [
+    {{
+      "type": "mcq",
+      "question": "Question text here?",
+      "options": ["a) Option A", "b) Option B", "c) Option C", "d) Option D"],
+      "correct": "a"
+    }},
+    {{
+      "type": "fill",
+      "question": "The capital of France is ___.",
+      "correct": "Paris"
+    }},
+    {{
+      "type": "short",
+      "question": "What is photosynthesis?",
+      "correct": "The process by which plants convert sunlight into food using chlorophyll."
+    }},
+    {{
+      "type": "long",
+      "question": "Write an essay on 'The Importance of Education' (100-150 words)",
+      "correct": "Essay should cover: education empowers individuals, develops critical thinking, creates opportunities, builds society."
+    }}
+  ]
+}}
+
+Rules:
+- Include 3 MCQs, 3 Fill-in-blanks, 2 Short answer, 2 Long answer
+- Make questions appropriate for Class IX (14-15 year olds)
+- For mcq: correct answer should be just the letter (a, b, c, or d)
+- For fill/short/long: provide a model answer
+- Return ONLY valid JSON, no explanation
+"""
+    
+    try:
+        resp = requests.post(API_URL, json={
+            "model": "gpt-4o-mini",
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 2000
+        }, timeout=60)
+        content = resp.json()['choices'][0]['message']['content']
+        import json
+        import re
+        match = re.search(r'\{[\s\S]*\}', content)
+        if match:
+            test_data = json.loads(match.group())
+            return jsonify(test_data)
+        return jsonify({"error": "Failed to parse JSON"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# Grade dynamic test
+@app.route('/grade-test', methods=['GET', 'POST', 'OPTIONS'])
+def grade_test():
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    data = request.json or {}
+    questions = data.get('questions', [])
+    answers = data.get('answers', {})
+    
+    prompt = f"""Grade this Class IX test. Compare student answers to model answers and provide score.
+
+Questions and answers:
+{json.dumps({'questions': questions, 'answers': answers}, indent=2)}
+
+Return this JSON format:
+{{
+  "score": total_marks_obtained,
+  "total": total_possible_marks,
+  "grade": "letter grade",
+  "feedback": "Overall feedback",
+  "details": [
+    {{"q": 1, "marks": 1, "feedback": "Brief feedback"}}
+  ]
+}}
+
+Grading rules:
+- MCQ: 1 mark each
+- Fill in blank: 1 mark each  
+- Short answer: 2 marks each
+- Long answer: 5 marks each
+- Grade: A+ (90%+), A (80%+), B (70%+), C (60%+), F (<60%)
+- Be fair and generous with partial marks
+- Return ONLY valid JSON
+"""
+    
+    try:
+        resp = requests.post(API_URL, json={
+            "model": "gpt-4o-mini",
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 1000
+        }, timeout=60)
+        content = resp.json()['choices'][0]['message']['content']
+        import json
+        import re
+        match = re.search(r'\{[\s\S]*\}', content)
+        if match:
+            result = json.loads(match.group())
+            return jsonify(result)
+        return jsonify({"error": "Failed to parse JSON"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 # Make quiz work without API
 @app.route('/grade', methods=['GET', 'POST', 'OPTIONS'])
 def grade():
