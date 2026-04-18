@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Maths Test - Class IX</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans', Arial, sans-serif; font-size: 14px; line-height: 1.7; background: #f5f5f5; color: #333; padding: 20px; max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 22px; text-align: center; background: #00838f; color: #fff; padding: 12px; margin-bottom: 15px; }
+  h2 { font-size: 16px; color: #006064; border-bottom: 2px solid #00838f; margin: 15px 0 10px; }
+  .section { background: #fff; padding: 15px; margin-bottom: 12px; border-radius: 8px; }
+  .question { background: #e0f7fa; padding: 12px; margin: 10px 0; border-radius: 6px; border-left: 4px solid #00838f; }
+  .question-num { font-weight: bold; color: #00838f; }
+  .opt-btn { display: block; width: 100%; padding: 8px 12px; background: #fff; border: 1px solid #00838f; border-radius: 4px; cursor: pointer; text-align: left; margin: 5px 0; }
+  .opt-btn:hover { background: #b2ebf2; }
+  .opt-btn.correct { background: #c8e6c9; border-color: #2e7d32; }
+  .opt-btn.wrong { background: #ffcdd2; border-color: #c62828; }
+  .score-box { text-align: center; font-size: 20px; font-weight: bold; background: #00838f; color: #fff; padding: 15px; border-radius: 8px; }
+  .timer { font-size: 18px; font-weight: bold; color: #c62828; }
+  .submit-btn { display: block; width: 100%; padding: 12px; background: #00838f; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+  .result-summary { display: none; background: #c8e6c9; padding: 15px; border-radius: 8px; margin-top: 15px; }
+  .result-summary.show { display: block; }
+  .back-link { display: inline-block; background: #00838f; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-top: 15px; }
+  input[type="number"], input[type="text"] { padding: 8px; font-size: 14px; border: 2px solid #00838f; border-radius: 4px; width: 100px; }
+</style>
+</head>
+<body>
+
+<h1>MATHEMATICS TEST - Class IX</h1>
+
+<div class="section">
+  <div class="score-box">
+    Score: <span id="score">0</span> / <span id="total">0</span>
+    <br><span class="timer">Time: <span id="time">25:00</span></span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q1: Fill in the Blanks</h2>
+  <div class="question">
+    <div class="question-num">1. The sum of angles in a triangle is ___°</div>
+    <input type="text" id="q1" placeholder="?">
+    <button onclick="checkFill(1, '180')">Check</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q2: Square Root</h2>
+  <div class="question">
+    <div class="question-num">2. √144 = ?</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">a) 10</div>
+    <div class="opt-btn" data-corr="true" onclick="check(this, true)">b) 12</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">c) 14</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q3: Sets</h2>
+  <div class="question">
+    <div class="question-num">3. If A = {1,2,3}, B = {3,4,5}, find A ∩ B</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">a) {1,2,3,4,5}</div>
+    <div class="opt-btn" data-corr="true" onclick="check(this, true)">b) {3}</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">c) {1,2,4,5}</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q4: Simplify</h2>
+  <div class="question">
+    <div class="question-num">4. 5 + 3 × 2 = ?</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">a) 16</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">b) 13</div>
+    <div class="opt-btn" data-corr="true" onclick="check(this, true)">c) 11</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q5: Factorization</h2>
+  <div class="question">
+    <div class="question-num">5. 2x + 4 = ?</div>
+    <input type="text" id="q5" placeholder="2(x + ?)">
+    <button onclick="checkFill(5, '2')">Check</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q6: Area</h2>
+  <div class="question">
+    <div class="question-num">6. Area of triangle with base 6, height 4 = ?</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">a) 24</div>
+    <div class="opt-btn" data-corr="true" onclick="check(this, true)">b) 12</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">c) 10</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q7: Brackets</h2>
+  <div class="question">
+    <div class="question-num">7. 2(x + 3) = ?</div>
+    <input type="text" id="q7" placeholder="?x + ?">
+    <button onclick="checkFill(7, '2x+6')">Check</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q8: BODMAS</h2>
+  <div class="question">
+    <div class="question-num">8. (10 + 5) ÷ 3 = ?</div>
+    <div class="opt-btn" data-corr="true" onclick="check(this, true)">a) 5</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">b) 15</div>
+    <div class="opt-btn" data-corr="false" onclick="check(this, false)">c) 3</div>
+  </div>
+</div>
+
+<button class="submit-btn" onclick="showResults()">Submit Test</button>
+
+<div id="result" class="result-summary">
+  <h2>Results</h2>
+  <p>Score: <span id="final-score">0</span> / 8</p>
+  <p id="grade">Grade: -</p>
+</div>
+
+<a href="../index.html" class="back-link">← Back</a>
+
+<script>
+let score = 0, total = 0;
+
+function check(btn, correct) {
+  if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+  total++;
+  if (correct) { btn.classList.add('correct'); score++; }
+  else { btn.classList.add('wrong'); }
+  document.getElementById('score').textContent = score;
+  document.getElementById('total').textContent = total;
+}
+
+function checkFill(q, ans) {
+  total++;
+  let val = document.getElementById('q' + q).value.trim().replace(/\s/g, '');
+  if (val === ans.replace(/\s/g, '')) {
+    score++;
+    document.getElementById('q' + q).style.background = '#c8e6c9';
+  } else {
+    document.getElementById('q' + q).style.background = '#ffcdd2';
+  }
+  document.getElementById('score').textContent = score;
+  document.getElementById('total').textContent = total;
+}
+
+let time = 1500;
+setInterval(() => {
+  if (time > 0) { time--; let m = Math.floor(time/60), s = time%60; document.getElementById('time').textContent = m + ':' + (s<10?'0'+s:s); }
+}, 1000);
+
+function showResults() {
+  document.getElementById('final-score').textContent = score;
+  let g = score>=7?'A+':score>=6?'A':score>=5?'B':score>=4?'C':'F';
+  document.getElementById('grade').textContent = 'Grade: ' + g;
+  document.getElementById('result').classList.add('show');
+}
+</script>
+
+</body>
+</html>

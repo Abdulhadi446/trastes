@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Science - Interactive Quiz</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans', Arial, sans-serif; font-size: 14px; line-height: 1.7; background: #f5f5f5; color: #333; padding: 30px; max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 24px; text-align: center; background: #2e7d32; color: #fff; padding: 15px; margin-bottom: 20px; }
+  h2 { font-size: 18px; color: #1b5e20; border-bottom: 2px solid #2e7d32; padding-bottom: 5px; margin: 20px 0 12px; }
+  .section { background: #fff; padding: 20px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  .back-link { display: inline-block; background: #2e7d32; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-top: 20px; }
+  
+  .quiz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 15px 0; }
+  .quiz-card { background: #e8f5e9; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32; }
+  .quiz-card h3 { margin: 0 0 10px 0; font-size: 15px; }
+  .quiz-opts { display: flex; flex-wrap: wrap; gap: 5px; }
+  .quiz-opts button { padding: 8px 12px; background: #fff; border: 1px solid #2e7d32; border-radius: 5px; cursor: pointer; }
+  .quiz-opts button:hover { background: #2e7d32; color: #fff; }
+  .quiz-opts button.correct { background: #2e7d32; color: #fff; }
+  .quiz-opts button.wrong { background: #c62828; color: #fff; border-color: #c62828; }
+  
+  .score-display { text-align: center; font-size: 24px; font-weight: bold; color: #2e7d32; padding: 10px; background: #e8f5e9; border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<h1>SCIENCE - Interactive Quiz</h1>
+
+<div class="section">
+  <h2>Test Your Knowledge!</h2>
+  <p>Click on the correct answer for each question.</p>
+  <div class="score-display">Score: <span id="score">0</span> / <span id="total">0</span></div>
+</div>
+
+<div class="quiz-grid">
+  <div class="quiz-card">
+    <h3>1. The unit of life is the ___</h3>
+    <div class="quiz-opts">
+      <button onclick="check(this, true)">cell</button>
+      <button onclick="check(this, false)">tissue</button>
+      <button onclick="check(this, false)">organ</button>
+    </div>
+  </div>
+  <div class="quiz-card">
+    <h3>2. Water formula is ___</h3>
+    <div class="quiz-opts">
+      <button onclick="check(this, false)">CO₂</button>
+      <button onclick="check(this, true)">H₂O</button>
+      <button onclick="check(this, false)">O₂</button>
+    </div>
+  </div>
+  <div class="quiz-card">
+    <h3>3. The powerhouse of the cell is ___</h3>
+    <div class="quiz-opts">
+      <button onclick="check(this, false)nucleus</button>
+      <button onclick="check(this, true)mitochondria</button>
+      <button onclick="check(this, false)">ribosome</button>
+    </div>
+  </div>
+  <div class="quiz-card">
+    <h3>4. Unit of force is ___</h3>
+    <div class="quiz-opts">
+      <button onclick="check(this, false)">joule</button>
+      <button onclick="check(this, true)">newton</button>
+      <button onclick="check(this, false)">watt</button>
+    </div>
+  </div>
+  <div class="quiz-card">
+    <h3>5. Rust is ___</h3>
+    <div class="quiz-opts">
+      <button onclick="check(this, false)">iron hydroxide</button>
+      <button onclick="check(this, true)">iron oxide</button>
+      <button onclick="check(this, false)">iron sulphate</button>
+    </div>
+  </div>
+  <div class="quiz-card">
+    <h3>6. Acid turns litmus ___</h3>
+    <div class="quiz-opts">
+      <button onclick="check(this, true)">red</button>
+      <button onclick="check(this, false)">blue</button>
+      <button onclick="check(this, false)">green</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let sc = 0, tot = 0;
+function check(btn, corr) {
+  if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+  tot++;
+  if (corr) { btn.classList.add('correct'); sc++; }
+  else { btn.classList.add('wrong'); }
+  document.getElementById('score').textContent = sc;
+  document.getElementById('total').textContent = tot;
+}
+</script>
+
+<div class="section">
+  <h2>Biology Key Terms</h2>
+  <ul>
+    <li><strong>Cell:</strong> Smallest unit of life</li>
+    <li><strong>Photosynthesis:</strong> Food making in plants</li>
+    <li><strong>Mitochondria:</strong> Powerhouse of cell</li>
+    <li><strong>Chlorophyll:</strong> Green pigment</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Chemistry Key Terms</h2>
+  <ul>
+    <li><strong>Atom:</strong> Smallest particle</li>
+    <li><strong>Molecule:</strong> Combined atoms</li>
+    <li><strong>Compound:</strong> chemically combined elements</li>
+    <li><strong>Oxidation:</strong> Reaction with oxygen</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Physics Key Terms</h2>
+  <ul>
+    <li><strong>Force:</strong> Push or pull (unit: Newton)</li>
+    <li><strong>Energy:</strong> Ability to do work (unit: Joule)</li>
+    <li><strong>Pressure:</strong> Force per unit area</li>
+    <li><strong>Velocity:</strong> Speed in a direction</li>
+  </ul>
+</div>
+
+<a href="../index.html" class="back-link">← Back to Main</a>
+
+</body>
+</html>

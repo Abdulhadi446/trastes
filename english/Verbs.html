@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forms of Verb - Interactive</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans', Arial, sans-serif; font-size: 14px; line-height: 1.7; background: #f5f5f5; color: #333; padding: 30px; max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 24px; text-align: center; background: #00838f; color: #fff; padding: 15px; margin-bottom: 20px; }
+  h2 { font-size: 18px; color: #006064; border-bottom: 2px solid #00838f; padding-bottom: 5px; margin: 20px 0 12px; }
+  .section { background: #fff; padding: 20px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  .back-link { display: inline-block; background: #00838f; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-top: 20px; }
+  
+  .verb-game { background: #e0f7fa; padding: 20px; border-radius: 10px; margin: 15px 0; }
+  .verb-row { background: #fff; padding: 15px; margin: 10px 0; border-radius: 8px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .verb-row select, .verb-row input { padding: 8px; font-size: 14px; border: 2px solid #00838f; border-radius: 5px; }
+  .verb-row input { width: 120px; }
+  .check-btn { padding: 8px 15px; background: #00838f; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+  .correct { background: #c8e6c9; }
+  .wrong { background: #ffcdd2; }
+  
+  .flip-card { perspective: 1000px; width: 200px; height: 120px; margin: 10px; display: inline-block; }
+  .flip-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
+  .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 10px; padding: 10px; text-align: center; font-weight: bold; }
+  .flip-front { background: #00838f; color: #fff; }
+  .flip-back { background: #006064; color: #fff; transform: rotateY(180deg); }
+</style>
+</head>
+<body>
+
+<h1>FORMS OF VERBS - Interactive Learning</h1>
+
+<div class="section">
+  <h2>Flip Cards - Hover to Reveal</h2>
+  <p>Hover over cards to see all three forms!</p>
+</div>
+
+<div style="text-align: center; margin: 20px 0;">
+  <div class="flip-card">
+    <div class="flip-inner">
+      <div class="flip-front"><strong>Begin</strong></div>
+      <div class="flip-back">V1: Begin<br>V2: Began<br>V3: Begun</div>
+    </div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-inner">
+      <div class="flip-front"><strong>Bring</strong></div>
+      <div class="flip-back">V1: Bring<br>V2: Brought<br>V3: Brought</div>
+    </div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-inner">
+      <div class="flip-front"><strong>Buy</strong></div>
+      <div class="flip-back">V1: Buy<br>V2: Bought<br>V3: Bought</div>
+    </div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-inner">
+      <div class="flip-front"><strong>Do</strong></div>
+      <div class="flip-back">V1: Do<br>V2: Did<br>V3: Done</div>
+    </div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-inner">
+      <div class="flip-front"><strong>Eat</strong></div>
+      <div class="flip-back">V1: Eat<br>V2: Ate<br>V3: Eaten</div>
+    </div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-inner">
+      <div class="flip-front"><strong>Go</strong></div>
+      <div class="flip-back">V1: Go<br>V2: Went<br>V3: Gone</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Practice Exercise</h2>
+  <div class="verb-game">
+    <div class="verb-row">
+      <strong>1. Yesterday, I ___ to school.</strong>
+      <select>
+        <option>go</option>
+        <option selected>went</option>
+        <option>gone</option>
+      </select>
+    </div>
+    <div class="verb-row">
+      <strong>2. She has ___ the work.</strong>
+      <select>
+        <option>do</option>
+        <option>did</option>
+        <option selected>done</option>
+      </select>
+    </div>
+    <div class="verb-row">
+      <strong>3. He ___ a letter yesterday.</strong>
+      <select>
+        <option>write</option>
+        <option selected>wrote</option>
+        <option>written</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Important Irregular Verbs</h2>
+  <table>
+    <tr><th>Base</th><th>Past</th><th>Past Participle</th></tr>
+    <tr><td>Begin</td><td>Began</td><td>Begun</td></tr>
+    <tr><td>Bring</td><td>Brought</td><td>Brought</td></tr>
+    <tr><td>Build</td><td>Built</td><td>Built</td></tr>
+    <tr><td>Buy</td><td>Bought</td><td>Bought</td></tr>
+    <tr><td>Come</td><td>Came</td><td>Come</td></tr>
+    <tr><td>Do</td><td>Did</td><td>Done</td></tr>
+    <tr><td>Drink</td><td>Drank</td><td>Drunk</td></tr>
+    <tr><td>Eat</td><td>Ate</td><td>Eaten</td></tr>
+    <tr><td>Fall</td><td>Fell</td><td>Fallen</td></tr>
+    <tr><td>Get</td><td>Got</td><td>Got</td></tr>
+    <tr><td>Go</td><td>Went</td><td>Gone</td></tr>
+    <tr><td>Have</td><td>Had</td><td>Had</td></tr>
+    <tr><td>Know</td><td>Knew</td><td>Known</td></tr>
+    <tr><td>Make</td><td>Made</td><td>Made</td></tr>
+    <tr><td>Read</td><td>Read</td><td>Read</td></tr>
+    <tr><td>See</td><td>Saw</td><td>Seen</td></tr>
+    <tr><td>Sing</td><td>Sang</td><td>Sung</td></tr>
+    <tr><td>Speak</td><td>Spoke</td><td>Spoken</td></tr>
+    <tr><td>Take</td><td>Took</td><td>Taken</td></tr>
+    <tr><td>Tell</td><td>Told</td><td>Told</td></tr>
+    <tr><td>Write</td><td>Wrote</td><td>Written</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>Exam Tips</h2>
+  <ul>
+    <li>Memorize 30 most common irregular verbs</li>
+    <li>Practice by writing sentences</li>
+    <li>Remember: past simple = V2, past participle = V3</li>
+  </ul>
+</div>
+
+<a href="../index.html" class="back-link">← Back to Main</a>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>English Test - Class IX</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans', Arial, sans-serif; font-size: 14px; line-height: 1.7; background: #f5f5f5; color: #333; padding: 20px; max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 22px; text-align: center; background: #1565c0; color: #fff; padding: 12px; margin-bottom: 15px; }
+  h2 { font-size: 16px; color: #0d47a1; border-bottom: 2px solid #1565c0; margin: 15px 0 10px; }
+  .section { background: #fff; padding: 15px; margin-bottom: 12px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .question { background: #e3f2fd; padding: 12px; margin: 10px 0; border-radius: 6px; border-left: 4px solid #1565c0; }
+  .question-num { font-weight: bold; color: #1565c0; margin-bottom: 5px; }
+  .options { display: flex; flex-direction: column; gap: 5px; }
+  .opt-btn { padding: 8px 12px; background: #fff; border: 1px solid #1565c0; border-radius: 4px; cursor: pointer; text-align: left; }
+  .opt-btn:hover { background: #bbdefb; }
+  .opt-btn.correct { background: #c8e6c9; border-color: #2e7d32; }
+  .opt-btn.wrong { background: #ffcdd2; border-color: #c62828; }
+  .score-box { text-align: center; font-size: 20px; font-weight: bold; background: #1565c0; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+  .timer { font-size: 18px; font-weight: bold; color: #c62828; }
+  .submit-btn { display: block; width: 100%; padding: 12px; background: #1565c0; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+  .submit-btn:hover { background: #0d47a1; }
+  .result-summary { display: none; background: #c8e6c9; padding: 15px; border-radius: 8px; margin-top: 15px; }
+  .result-summary.show { display: block; }
+  .back-link { display: inline-block; background: #1565c0; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-top: 15px; }
+</style>
+</head>
+<body>
+
+<h1>ENGLISH TEST - Class IX<br><small>Aptitude Guideline</small></h1>
+
+<div class="section">
+  <div class="score-box">
+    Score: <span id="score">0</span> / <span id="total">0</span>
+    <br><span class="timer">Time: <span id="time">30:00</span></span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q1: Comprehension</h2>
+  <div class="question">
+    <div class="question-num">Read passage and answer: "The sun sets in the west." - The sun rises in the ___</div>
+    <div class="options">
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">a) East</button>
+      <button class="opt-btn" data-corr="true" onclick="check(this, true)">b) West</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">c) North</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">d) South</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q2: Essay Writing</h2>
+  <div class="question">
+    <div class="question-num">Which adjective makes this better? "A ___ sunrise"</div>
+    <div class="options">
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">a) ugly</button>
+      <button class="opt-btn" data-corr="true" onclick="check(this, true)">b) beautiful</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">c) bad</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q3: Letter/Application</h2>
+  <div class="question">
+    <div class="question-num">Who do you write a formal application to?</div>
+    <div class="options">
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">a) Friend</button>
+      <button class="opt-btn" data-corr="true" onclick="check(this, true)">b) Principal</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">c) Mother</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q4: Idioms</h2>
+  <div class="question">
+    <div class="question-num">"Piece of cake" means:</div>
+    <div class="options">
+      <button class="opt-btn" data-corr="true" onclick="check(this, true)">a) Very easy</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">b) A food item</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">c) Very hard</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q5: Verbs</h2>
+  <div class="question">
+    <div class="question-num">Past tense of "go":</div>
+    <div class="options">
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">a) go</button>
+      <button class="opt-btn" data-corr="true" onclick="check(this, true)">b) went</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">c) gone</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q6: Active/Passive</h2>
+  <div class="question">
+    <div class="question-num">"Ali writes a letter." in passive:</div>
+    <div class="options">
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">a) A letter is write by Ali</button>
+      <button class="opt-btn" data-corr="true" onclick="check(this, true)">b) A letter is written by Ali</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">c) Ali is written a letter</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q7: Do as Directed</h2>
+  <div class="question">
+    <div class="question-num">Change to plural: "The boy runs."</div>
+    <div class="options">
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">a) The boy run.</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">b) The boy is running.</button>
+      <button class="opt-btn" data-corr="true" onclick="check(this, true)">c) The boys run.</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Q8: Transformation</h2>
+  <div class="question">
+    <div class="question-num">"He is very wise." to comparative:</div>
+    <div class="options">
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">a) He is wiser than wise.</button>
+      <button class="opt-btn" data-corr="true" onclick="check(this, true)">b) He is wiser than others.</button>
+      <button class="opt-btn" data-corr="false" onclick="check(this, false)">c) He is most wise.</button>
+    </div>
+  </div>
+</div>
+
+<button class="submit-btn" onclick="showResults()">Submit Test</button>
+
+<div id="result" class="result-summary">
+  <h2>Test Results</h2>
+  <p>Your Score: <span id="final-score">0</span> / 8</p>
+  <p id="grade">Grade: -</p>
+</div>
+
+<a href="../index.html" class="back-link">← Back to Main</a>
+
+<script>
+let score = 0, total = 0, answered = 0;
+
+function check(btn, correct) {
+  if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+  answered++;
+  total++;
+  if (correct) {
+    btn.classList.add('correct');
+    btn.innerHTML += ' ✓';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    btn.innerHTML += ' ✗';
+  }
+  document.getElementById('score').textContent = score;
+  document.getElementById('total').textContent = total;
+}
+
+let time = 1800;
+function timer() {
+  if (time > 0) {
+    time--;
+    let m = Math.floor(time / 60);
+    let s = time % 60;
+    document.getElementById('time').textContent = m + ':' + (s < 10 ? '0' + s : s);
+  }
+}
+setInterval(timer, 1000);
+
+function showResults() {
+  document.getElementById('final-score').textContent = score;
+  let grade = score >= 7 ? 'A+' : score >= 6 ? 'A' : score >= 5 ? 'B' : score >= 4 ? 'C' : 'F';
+  document.getElementById('grade').textContent = 'Grade: ' + grade;
+  document.getElementById('result').classList.add('show');
+}
+</script>
+
+</body>
+</html>

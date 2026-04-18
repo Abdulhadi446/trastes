@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sets - Interactive</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans', Arial, sans-serif; font-size: 14px; line-height: 1.7; background: #f5f5f5; color: #333; padding: 30px; max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 24px; text-align: center; background: #6a1b9a; color: #fff; padding: 15px; margin-bottom: 20px; }
+  h2 { font-size: 18px; color: #4a148c; border-bottom: 2px solid #6a1b9a; padding-bottom: 5px; margin: 20px 0 12px; }
+  .section { background: #fff; padding: 20px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  ul, ol { padding-left: 25px; }
+  li { margin-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+  th, td { border: 1px solid #ddd; padding: 8px; }
+  th { background: #6a1b9a; color: #fff; }
+  .back-link { display: inline-block; background: #6a1b9a; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-top: 20px; }
+  
+  .venn-box { display: flex; gap: 20px; justify-content: center; margin: 20px 0; flex-wrap: wrap; }
+  .set-circle { width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; color: #fff; }
+  .set-a { background: rgba(106, 27, 154, 0.5); border: 3px solid #6a1b9a; }
+  .set-b { background: rgba(255, 152, 0, 0.5); border: 3px solid #f57c00; }
+  .set-overlap { background: rgba(156, 39, 176, 0.7); }
+  
+  .interactive { background: #f3e5f5; padding: 20px; border-radius: 10px; margin: 15px 0; }
+  .calc-input { padding: 10px; font-size: 16px; width: 180px; border: 2px solid #6a1b9a; border-radius: 5px; text-align: center; }
+  .calc-btn { padding: 10px 20px; font-size: 16px; background: #6a1b9a; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+  .result-box { margin-top: 15px; padding: 15px; background: #fff; border-radius: 5px; }
+  .element { display: inline-block; padding: 5px 12px; margin: 3px; background: #6a1b9a; color: #fff; border-radius: 15px; }
+</style>
+</head>
+<body>
+
+<h1>SETS - Interactive Learning</h1>
+
+<div class="section">
+  <h2>Visual Representation</h2>
+  <p>Sets are shown using curly brackets { }</p>
+  <div class="venn-box">
+    <div class="set-circle set-a">A = {1,2,3}</div>
+    <div class="set-circle set-b">B = {3,4,5}</div>
+  </div>
+  <p style="text-align:center;">A ∩ B = {3} (Common element)</p>
+</div>
+
+<div class="section">
+  <h2>Set Operations Calculator</h2>
+  <div class="interactive">
+    <p>Enter sets (comma separated):</p>
+    <div style="margin-bottom:10px;">
+      <label>Set A: </label>
+      <input type="text" id="setA" class="calc-input" placeholder="e.g. 1,2,3">
+    </div>
+    <div style="margin-bottom:10px;">
+      <label>Set B: </label>
+      <input type="text" id="setB" class="calc-input" placeholder="e.g. 3,4,5">
+    </div>
+    <button class="calc-btn" onclick="calcSets()">Calculate</button>
+    <div id="setResult" class="result-box"></div>
+  </div>
+</div>
+
+<script>
+function calcSets() {
+  const aStr = document.getElementById('setA').value;
+  const bStr = document.getElementById('setB').value;
+  const result = document.getElementById('setResult');
+  
+  if (!aStr || !bStr) {
+    result.innerHTML = '<p style="color:red;">Enter both sets!</p>';
+    return;
+  }
+  
+  const A = aStr.split(',').map(x => x.trim()).filter(x => x);
+  const B = bStr.split(',').map(x => x.trim()).filter(x => x);
+  
+  const union = [...new Set([...A, ...B])];
+  const intersection = A.filter(x => B.includes(x));
+  const onlyA = A.filter(x => !B.includes(x));
+  const onlyB = B.filter(x => !A.includes(x));
+  
+  let html = '<h4>Results:</h4>';
+  html += '<p><strong>A ∪ B (Union):</strong> {';
+  html += union.map(e => '<span class="element">' + e + '</span>').join(', ') + '}</p>';
+  html += '<p><strong>A ∩ B (Intersection):</strong> {';
+  html += (intersection.length ? intersection.map(e => '<span class="element">' + e + '</span>').join(', ') : 'empty') + '}</p>';
+  html += '<p><strong>A - B (Difference):</strong> {';
+  html += (onlyA.length ? onlyA.map(e => '<span class="element">' + e + '</span>').join(', ') : 'empty') + '}</p>';
+  html += '<p><strong>n(A) = ' + A.length + '</strong>, <strong>n(B) = ' + B.length + '</strong></p>';
+  
+  result.innerHTML = html;
+}
+</script>
+
+<div class="section">
+  <h2>Operations Definitions</h2>
+  <table>
+    <tr><th>Symbol</th><th>Name</th><th>Meaning</th></tr>
+    <tr><td>∪</td><td>Union</td><td>All elements from both sets</td></tr>
+    <tr><td>∩</td><td>Intersection</td><td>Common elements only</td></tr>
+    <tr><td>-</td><td>Difference</td><td>Elements in A but not in B</td></tr>
+    <tr><td>'</td><td>Complement</td><td>Not in the set</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>Examples</h2>
+  <ul>
+    <li>If A = {1,2,3} and B = {3,4,5}</li>
+    <li>Then A ∪ B = {1,2,3,4,5}</li>
+    <li>And A ∩ B = {3}</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Types of Sets</h2>
+  <ul>
+    <li><strong>Empty Set (∅):</strong> Has no elements</li>
+    <li><strong>Subset (⊆):</strong> All elements in B are also in A</li>
+    <li><strong>Universal Set (U):</strong> Contains all sets</li>
+    <li><strong>Finite:</strong> Can count elements</li>
+    <li><strong>Infinite:</strong> Cannot count (like natural numbers)</li>
+  </ul>
+</div>
+
+<a href="../index.html" class="back-link">← Back to Main</a>
+
+</body>
+</html>

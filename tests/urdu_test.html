@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>اردو ٹیسٹ - Class IX</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Nastaliq Urdu', Arial; font-size: 16px; line-height: 2; background: #f5f5f5; color: #333; padding: 20px; max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 22px; text-align: center; background: #6a1b9a; color: #fff; padding: 12px; margin-bottom: 15px; }
+  h2 { font-size: 16px; color: #4a148c; border-bottom: 2px solid #6a1b9a; margin: 15px 0 10px; }
+  .section { background: #fff; padding: 15px; margin-bottom: 12px; border-radius: 8px; }
+  .question { background: #f3e5f5; padding: 12px; margin: 10px 0; border-radius: 6px; border-right: 4px solid #6a1b9a; }
+  .question-num { font-weight: bold; color: #6a1b9a; }
+  .opt-btn { display: block; width: 100%; padding: 8px 12px; background: #fff; border: 1px solid #6a1b9a; border-radius: 4px; cursor: pointer; text-align: right; margin: 5px 0; }
+  .opt-btn:hover { background: #e1bee7; }
+  .opt-btn.correct { background: #ce93d8; border-color: #4a148c; }
+  .opt-btn.wrong { background: #ffcdd2; border-color: #c62828; }
+  .score-box { text-align: center; font-size: 20px; font-weight: bold; background: #6a1b9a; color: #fff; padding: 15px; border-radius: 8px; }
+  .submit-btn { display: block; width: 100%; padding: 12px; background: #6a1b9a; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+  .result-summary { display: none; background: #ce93d8; padding: 15px; border-radius: 8px; margin-top: 15px; }
+  .result-summary.show { display: block; }
+  .back-link { display: inline-block; background: #6a1b9a; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-top: 15px; }
+</style>
+</head>
+<body>
+
+<h1>اردو ٹیسٹ - Class IX</h1>
+
+<div class="section">
+  <div class="score-box">
+    اسکور: <span id="score">0</span> / <span id="total">0</span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>سوال 1: سابقے</h2>
+  <div class="question">
+    <div class="question-num">1. "ناامید" میں کون سا سابقہ ہے؟</div>
+    <button class="opt-btn" data-corr="true" onclick="check(this, true)">الف) نا-</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ب) پر-</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ج) کم-</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>سوال 2: تشبیہ</h2>
+  <div class="question">
+    <div class="question-num">2. "چاند کی طرح" کیا ہے؟</div>
+    <button class="opt-btn" data-corr="true" onclick="check(this, true)">الف) سفید</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ب) گرم</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ج) ٹھنڈا</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>سوال 3: مذکر و مؤنث</h2>
+  <div class="question">
+    <div class="question-num">3. "باپ" کا مؤنث کیا ہے؟</div>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">الف) بیٹا</button>
+    <button class="opt-btn" data-corr="true" onclick="check(this, true)">ب) ماں</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ج) بیٹی</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>سوال 4: محاورہ</h2>
+  <div class="question">
+    <div class="question-num">4. "وقت کی قیمت نہیں" کا مطلب کیا ہے؟</div>
+    <button class="opt-btn" data-corr="true" onclick="check(this, true)">الف) وقت ضائع نہ کرو</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ب) وقت بہت ہے</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ج) جلدی کرو</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>سوال 5: مضمون نگاری</h2>
+  <div class="question">
+    <div class="question-num">5. مضمون کتنے الفاظ کا ہونا چاہیے؟</div>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">الف) 50</button>
+    <button class="opt-btn" data-corr="true" onclick="check(this, true)">ب) 100</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ج) 200</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>سوال 6: درخواست</h2>
+  <div class="question">
+    <div class="question-num">6. درخواست کسے لکھی جاتی ہے؟</div>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">الف) دوست کو</button>
+    <button class="opt-btn" data-corr="true" onclick="check(this, true)">ب) مدیر کو</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ج) والدین کو</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>سوال 7: قافیہ</h2>
+  <div class="question">
+    <div class="question-num">7. "سارا" کا قافیہ کیا ہے؟</div>
+    <button class="opt-btn" data-corr="true" onclick="check(this, true)">الف) -ارا</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ب) -یل</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ج) -نا</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2>سوال 8: معلومات عامہ</h2>
+  <div class="question">
+    <div class="question-num">8. پاکستان کا دارالحکومت کہاں ہے؟</div>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">الف) کراچی</button>
+    <button class="opt-btn" data-corr="true" onclick="check(this, true)">ب) اسلام آباد</button>
+    <button class="opt-btn" data-corr="false" onclick="check(this, false)">ج) لاہور</button>
+  </div>
+</div>
+
+<button class="submit-btn" onclick="showResults()">ٹیسٹ جمع کروائیں</button>
+
+<div id="result" class="result-summary">
+  <h2>نتیجہ</h2>
+  <p>اسکور: <span id="final-score">0</span> / 8</p>
+  <p id="grade">درجہ: -</p>
+</div>
+
+<a href="../index.html" class="back-link">← واپس</a>
+
+<script>
+let score = 0, total = 0;
+
+function check(btn, correct) {
+  if (btn.classList.contains('correct') || btn.classList.contains('wrong')) return;
+  total++;
+  if (correct) { btn.classList.add('correct'); score++; }
+  else { btn.classList.add('wrong'); }
+  document.getElementById('score').textContent = score;
+  document.getElementById('total').textContent = total;
+}
+
+function showResults() {
+  document.getElementById('final-score').textContent = score;
+  let g = score>=7?'A+':score>=6?'A':score>=5?'B':score>=4?'C':'F';
+  document.getElementById('grade').textContent = 'درجہ: ' + g;
+  document.getElementById('result').classList.add('show');
+}
+</script>
+
+</body>
+</html>

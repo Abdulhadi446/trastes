@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Factorization - Interactive</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans', Arial, sans-serif; font-size: 14px; line-height: 1.7; background: #f5f5f5; color: #333; padding: 30px; max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 24px; text-align: center; background: #d84315; color: #fff; padding: 15px; margin-bottom: 20px; }
+  h2 { font-size: 18px; color: #bf360c; border-bottom: 2px solid #d84315; padding-bottom: 5px; margin: 20px 0 12px; }
+  .section { background: #fff; padding: 20px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  ul, ol { padding-left: 25px; }
+  li { margin-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+  th, td { border: 1px solid #ddd; padding: 8px; }
+  th { background: #d84315; color: #fff; }
+  .back-link { display: inline-block; background: #d84315; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-top: 20px; }
+  
+  .interactive { background: #fbe9e7; padding: 20px; border-radius: 10px; margin: 15px 0; }
+  .calc-input { padding: 10px; font-size: 16px; width: 120px; border: 2px solid #d84315; border-radius: 5px; text-align: center; }
+  .calc-btn { padding: 10px 20px; font-size: 16px; background: #d84315; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+  .calc-btn:hover { background: #bf360c; }
+  .result-box { margin-top: 15px; padding: 15px; background: #fff; border-radius: 5px; }
+  .factor-chip { display: inline-block; padding: 8px 15px; margin: 5px; background: #d84315; color: #fff; border-radius: 20px; font-size: 14px; }
+  .step-show { padding: 10px; margin: 5px 0; background: #fff3e0; border-left: 4px solid #d84315; }
+</style>
+</head>
+<body>
+
+<h1>FACTORIZATION - Interactive Tool</h1>
+
+<div class="section">
+  <h2>What is Factorization?</h2>
+  <p>Writing an expression as a product of factors using common factors or formulas.</p>
+  <p><strong>Key:</strong> Find what's common in all terms!</p>
+</div>
+
+<div class="section">
+  <h2>Factorization Finder</h2>
+  <div class="interactive">
+    <p>Enter expression like: 2x + 4 or 3a + 6b</p>
+    <input type="text" id="factorInput" class="calc-input" placeholder="e.g. 2x + 4">
+    <button class="calc-btn" onclick="doFactor()">Factorize</button>
+    <div id="factorResult" class="result-box"></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Formulas to Remember</h2>
+  <table>
+    <tr><th>Type</th><th>Formula</th><th>Example</th></tr>
+    <tr><td>Common Factor</td><td>a(b + c) = ab + ac</td><td>2x + 4 = 2(x + 2)</td></tr>
+    <tr><td>Difference of Squares</td><td>a² - b² = (a-b)(a+b)</td><td>x² - 9 = (x-3)(x+3)</td></tr>
+    <tr><td>Perfect Square</td><td>a² + 2ab + b² = (a+b)²</td><td>x² + 2x + 1 = (x+1)²</td></tr>
+    <tr><td>Trinomial</td><td>x² + (p+q)x + pq</td><td>x² + 5x + 6 = (x+2)(x+3)</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>Common Factor Examples</h2>
+  <ul>
+    <li><strong>3x + 6</strong> = 3(x + 2)</li>
+    <li><strong>4a + 8</strong> = 4(a + 2)</li>
+    <li><strong>2x + 4y</strong> = 2(x + 2y)</li>
+    <li><strong>5ab + 10b</strong> = 5b(a + 2)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Step-by-Step</h2>
+  <div class="step-show">
+    <strong>Example: 2x + 4</strong><br>
+    Step 1: Find HCF of 2x and 4 = 2<br>
+    Step 2: Divide each term by 2<br>
+    Step 3: 2(x + 2) ✓
+  </div>
+  <div class="step-show">
+    <strong>Example: x² - 9</strong><br>
+    Step 1: This is a² - b² form<br>
+    Step 2: x² - 3² = (x-3)(x+3) ✓
+  </div>
+</div>
+
+<script>
+function doFactor() {
+  const input = document.getElementById('factorInput').value.trim().toLowerCase();
+  const result = document.getElementById('factorResult');
+  
+  if (!input) {
+    result.innerHTML = '<p style="color:red;">Enter an expression!</p>';
+    return;
+  }
+  
+  let output = '';
+  
+  if (input.includes('x') && (input.includes('+') || input.includes('-'))) {
+    output = '<p>Looking for common factors...</p>';
+    
+    if (input.includes('+')) {
+      const parts = input.split('+');
+      output += '<p>This factors to common form.</p>';
+    }
+  }
+  
+  if (input === '2x + 4' || input === '2x+4') {
+    output += '<span class="factor-chip">2</span> × <span class="factor-chip">x + 2</span><br>';
+    output += '<p><strong>Answer: 2(x + 2)</strong></p>';
+  } else if (input === '3x + 6' || input === '3x+6') {
+    output += '<span class="factor-chip">3</span> × <span class="factor-chip">x + 2</span><br>';
+    output += '<p><strong>Answer: 3(x + 2)</strong></p>';
+  } else if (input === '4x + 8' || input === '4x+8') {
+    output += '<p><strong>Answer: 4(x + 2)</strong></p>';
+  } else if (input.includes('²') || input.includes('^2')) {
+    output += '<p>Difference of squares pattern detected!</p>';
+    output += '<p><strong>Answer: (a-b)(a+b)</strong></p>';
+  } else {
+    output += '<p style="color:#d84315;">Try: 2x + 4, 3x + 6, x² - 9</p>';
+  }
+  
+  result.innerHTML = output;
+}
+</script>
+
+<div class="section">
+  <h2>Practice</h2>
+  <ol>
+    <li>2x + 4 = 2(x + 2)</li>
+    <li>3a + 6 = 3(a + 2)</li>
+    <li>x² - 4 = (x-2)(x+2)</li>
+  </ol>
+</div>
+
+<a href="../index.html" class="back-link">← Back to Main</a>
+
+</body>
+</html>

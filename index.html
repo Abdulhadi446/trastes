@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. George's School - Aptitude Test Guideline</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Noto+Sans:wght@400;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Noto Sans", Arial, sans-serif;
+        font-size: 14px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 750px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        overflow: hidden;
+      }
+
+      .header {
+        text-align: center;
+        background: linear-gradient(135deg, #1a472a 0%, #2e7d32 100%);
+        color: #fff;
+        padding: 25px 20px;
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .header h2 {
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 8px;
+        opacity: 0.9;
+      }
+
+      .header .tagline {
+        font-style: italic;
+        font-size: 14px;
+        margin-top: 8px;
+        color: #ffc107;
+      }
+
+      .test-banner {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin: 0 20px 20px;
+        border-radius: 10px;
+      }
+
+      .test-banner a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .test-banner a:hover {
+        text-decoration: underline;
+      }
+
+      .header .test-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 12px;
+        background: rgba(255,255,255,0.2);
+        padding: 10px 20px;
+        border-radius: 25px;
+        display: inline-block;
+      }
+
+      .class-label {
+        display: inline-block;
+        background: #ffc107;
+        color: #1a472a;
+        padding: 5px 20px;
+        margin-top: 10px;
+        font-weight: 700;
+        font-size: 14px;
+        border-radius: 20px;
+      }
+
+      .section {
+        margin: 0 20px 18px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border-left: 4px solid;
+      }
+
+      .section:nth-child(odd) {
+        border-left-color: #1565c0;
+      }
+      
+      .section:nth-child(even) {
+        border-left-color: #00838f;
+      }
+
+      .section-title {
+        font-weight: 700;
+        font-size: 16px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section-title::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 8px;
+      }
+
+      ul li {
+        background: #fff;
+        padding: 10px 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      ul li:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+
+      .urdu-section {
+        direction: rtl;
+        text-align: right;
+        font-family: "Noto Nastaliq Urdu", "Noto Sans Arabic", Arial, sans-serif;
+        font-size: 15px;
+        line-height: 2.2;
+        margin-top: 10px;
+        background: #faf5ff;
+        border-left: 4px solid #6a1b9a;
+      }
+
+      .urdu-section .section-title {
+        font-size: 18px;
+        color: #6a1b9a;
+      }
+
+      ul li a {
+        color: #333;
+        text-decoration: none;
+        display: block;
+        font-weight: 500;
+      }
+
+      ul li a:hover {
+        color: #1565c0;
+        font-weight: 600;
+      }
+
+      .section-title a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 20px;
+        background: #f8f9fa;
+        color: #666;
+        font-size: 12px;
+        border-top: 1px solid #eee;
+      }
+
+      @media print {
+        body { padding: 0; }
+        .container { box-shadow: none; }
+      }
+
+      @media (max-width: 600px) {
+        body { padding: 10px; }
+        .header h1 { font-size: 22px; }
+        .section { margin: 0 10px 15px; }
+        ul { grid-template-columns: 1fr; }
+      }
+
+      @media print {
+        body {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>ST. GEORGE'S SCHOOL</h1>
+      <h2>MONTESSORI TO SECONDARY</h2>
+      <div class="tagline">Excellence with Perfection</div>
+      <div class="test-title">GUIDELINE FOR APTITUDE TEST</div>
+      <div class="class-label">CLASS: IX</div>
+    </div>
+
+    <div class="test-banner">
+      <a href="tests/english_test.html">📝 Take English Test</a> | 
+      <a href="tests/maths_test.html">📐 Take Maths Test</a> | 
+      <a href="tests/science_test.html">🔬 Take Science Test</a> | 
+      <a href="tests/urdu_test.html">📝 Take Urdu Test</a>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><a href="english/">ENGLISH:</a></div>
+      <ul>
+        <li><a href="english/Comprehension.html">Comprehension</a></li>
+        <li>
+          <a href="english/Essay-Writing.html"
+            >Essay writing using adjective</a
+          >
+        </li>
+        <li>
+          <a href="english/Letter-Application.html">Letter / Application</a>
+        </li>
+        <li><a href="english/Idioms-Phrases.html">Idioms / Phrases</a></li>
+        <li><a href="english/Verbs.html">Forms of verb</a></li>
+        <li>
+          <a href="english/Active-Passive-Voice.html"
+            >Active / Passive voice</a
+          >
+        </li>
+        <li><a href="english/Do-as-Directed.html">Do as directed</a></li>
+        <li>
+          <a href="english/Transformation-of-Sentences.html"
+            >Transformation of sentences from negative to positive or vise
+            versa.</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><a href="maths/">MATHS:</a></div>
+      <ul>
+        <li><a href="maths/Fill-in-the-Blanks.html">Fill in the blanks</a></li>
+        <li><a href="maths/MCQs.html">M.C.Qs</a></li>
+        <li><a href="maths/Square-Root.html">Square Root</a></li>
+        <li><a href="maths/Sets.html">Sets</a></li>
+        <li>
+          <a href="maths/Simplify-Questions.html">Simplify the questions</a>
+        </li>
+        <li><a href="maths/Factorization.html">Factorization</a></li>
+        <li>
+          <a href="maths/Area-Volume.html"
+            >Find area of triangle and volume of different shapes.</a
+          >
+        </li>
+        <li>
+          <a href="maths/Brackets.html">Removal of different brackets.</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><a href="science/">SCIENCE:</a></div>
+      <ul>
+        <li>
+          <a href="science/Fill-in-the-Blanks.html"
+            >Fill in the blanks (Bio, Chem, Phy)</a
+          >
+        </li>
+        <li>
+          <a href="science/Chemicals.html"
+            >Chemicals formula, symbols and equations</a
+          >
+        </li>
+        <li>
+          <a href="science/Properties.html">Properties of given substances</a>
+        </li>
+        <li>
+          <a href="science/Define-Terms.html"
+            >Define the terms (Phy, Chem, Bio)</a
+          >
+        </li>
+        <li>
+          <a href="science/Photosynthesis.html"
+            >Photosynthesis &nbsp;•&nbsp; Neutralization &nbsp;•&nbsp; Chemical
+            reactions</a
+          >
+        </li>
+      </ul>
+    </div>
+
+<div class="section urdu-section">
+      <div class="section-title"><a href="urdu/">اردو:</a></div>
+      <ul>
+        <li><a href="urdu/Sawaqe-Lahiqe.html">سابقے لاحقے</a></li>
+        <li><a href="urdu/Tashbeeh-Alfaz.html">تشبیہ الفاظ</a></li>
+        <li><a href="urdu/Mahawrey.html">محاورے</a></li>
+        <li><a href="urdu/Muzakar-Muannath.html">مذکر مؤنث</a></li>
+        <li><a href="urdu/Zarb-AlAmthal.html">ضرب الامثال</a></li>
+        <li><a href="urdu/Malomat-Aama.html">معلومات عامہ</a></li>
+        <li><a href="urdu/Muzoon-Nigari.html">مضمون نگاری (۱۰۰ الفاظ)</a></li>
+        <li><a href="urdu/Darkhwast.html">درخواست</a></li>
+        <li><a href="urdu/Hum-Qafia-Alfaz.html">ہم قافیہ الفاظ</a></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>St. George's School | Aptitude Test Preparation</p>
+    </div>
+
+    <!-- AI Chatbot -->
+    <button class="ai-chat-btn" onclick="toggleAIChat()">🤖</button>
+    <div class="ai-chat-modal" id="aiChatModal">
+      <div class="ai-chat-header">
+        <span>🤖 AI Learning Assistant</span>
+        <button onclick="toggleAIChat()">✕</button>
+      </div>
+      <div class="ai-chat-subject">
+        <select id="aiSubject">
+          <option value="english">📖 English</option>
+          <option value="maths">📐 Maths</option>
+          <option value="science">🔬 Science</option>
+          <option value="urdu">اردو Urdu</option>
+        </select>
+      </div>
+      <div class="ai-chat-msgs" id="aiChatMsgs">
+        <div class="ai-msg ai-bot">👋 Hi! I'm your AI learning assistant. Select a subject and ask any question!</div>
+      </div>
+      <div class="ai-typing" id="aiTyping"><span>•</span><span>•</span><span>•</span></div>
+      <div class="ai-chat-input">
+        <input type="text" id="aiChatInput" placeholder="Type your question...">
+        <button onclick="sendAIChat()">Send</button>
+      </div>
+    </div>
+
+    <style>
+    .ai-chat-btn{
+      position:fixed;bottom:25px;right:25px;width:65px;height:65px;
+      border-radius:50%;border:none;cursor:pointer;
+      background:linear-gradient(135deg,#667eea,#764ba2);
+      font-size:30px;box-shadow:0 4px 20px rgba(0,0,0,0.3);
+      z-index:9999;transition:transform 0.2s
+    }
+    .ai-chat-btn:hover{transform:scale(1.1)}
+    .ai-chat-modal{
+      position:fixed;bottom:100px;right:25px;width:350px;height:450px;
+      background:#fff;border-radius:15px;box-shadow:0 10px 40px rgba(0,0,0,0.25);
+      display:none;flex-direction:column;z-index:9998
+    }
+    .ai-chat-modal.show{display:flex}
+    .ai-chat-header{
+      background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;
+      padding:12px 15px;border-radius:15px 15px 0 0;
+      display:flex;justify-content:space-between;align-items:center
+    }
+    .ai-chat-header button{background:none;border:none;color:#fff;font-size:18px;cursor:pointer}
+    .ai-chat-subject{padding:10px;background:#f5f5f5}
+    .ai-chat-subject select{width:100%;padding:8px;border-radius:5px;border:1px solid #ddd}
+    .ai-chat-msgs{flex:1;padding:12px;overflow-y:auto;background:#fafafa}
+    .ai-msg{padding:10px 12px;margin:8px 0;border-radius:12px;max-width:85%;line-height:1.4;font-size:13px}
+    .ai-user{margin-left:auto;background:#667eea;color:#fff}
+    .ai-bot{background:#e8e8e8;color:#333}
+    .ai-typing{padding:10px;display:none;background:#f0f0f0}
+    .ai-typing span{display:inline-block;margin:0 3px;color:#888;animation:blink 1s infinite}
+    @keyframes blink{50%{opacity:0.3}}
+    .ai-chat-input{padding:12px;display:flex;gap:8px;border-top:1px solid #eee}
+    .ai-chat-input input{flex:1;padding:10px;border:1px solid #ddd;border-radius:20px}
+    .ai-chat-input button{padding:8px 16px;background:#667eea;color:#fff;border:none;border-radius:20px}
+    @media(max-width:400px){
+      .ai-chat-modal{width:calc(100% - 20px);right:10px;bottom:90px}
+      .ai-chat-btn{right:15px;bottom:20px}
+    }
+    </style>
+
+    <script>
+    const aiKnowledge = {
+      english: "You are an English expert for Class IX. Topics: Comprehension, Essay writing, Letter/Application writing, Idioms & Phrases, Verb forms, Active-Passive voice, Do as directed, Sentence transformation.",
+      maths: "You are a Maths expert for Class IX. Topics: Square root, Factorization, Sets (union, intersection), BODMAS, Area and Volume formulas. Triangle area = ½×base×height, Rectangle = length×breadth, Circle = πr², Cuboid volume = l×b×h",
+      science: "You are a Science expert for Class IX. Biology: Cell (unit of life), Mitochondria (powerhouse), Photosynthesis. Chemistry: H₂O (water), Na (Sodium), Rust (Fe₂O₃), Acid turns litmus red. Physics: Newton (unit of force)",
+      urdu: "آپ اردو زبان کے استاد ہیں۔ Topic: سابقرے، لاحقے، تشبیہ الفاظ، محاورے، مذکر و مؤنث، ضرب الامثال، معلومات عامہ، مضمون نگاری، درخواست"
+    };
+    let aiSubject = 'english';
+    function toggleAIChat() { document.getElementById('aiChatModal').classList.toggle('show'); }
+    document.getElementById('aiSubject').addEventListener('change',function(){aiSubject=this.value});
+    function addAIMsg(text,type){
+      const d=document.createElement('div');d.className='ai-msg ai-'+type;d.textContent=text;
+      document.getElementById('aiChatMsgs').appendChild(d);
+      document.getElementById('aiChatMsgs').scrollTop=document.getElementById('aiChatMsgs').scrollHeight;
+    }
+    document.getElementById('aiChatInput').addEventListener('keypress',e=>{if(e.key==='Enter')sendAIChat()});
+async function sendAIChat(){
+      const inp=document.getElementById('aiChatInput'),q=inp.value.trim();
+      if(!q)return; addAIMsg(q,'user');inp.value='';
+      document.getElementById('aiTyping').style.display='block';
+      
+      try{
+        const res=await fetch('http://localhost:5000/chat',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            model:'gpt-4o-mini',
+            max_tokens:200,
+            messages:[
+              {role:'system',content:'You are a friendly Class IX tutor. Keep answers SHORT (2-3 sentences), use examples. '+aiKnowledge[aiSubject]},
+              {role:'user',content:q}
+            ]
+          })
+        });
+        const data=await res.json();
+        if(data.choices && data.choices[0] && data.choices[0].message){
+          addAIMsg(data.choices[0].message.content,'bot');
+        }else if(data.error){
+          addAIMsg('AI Error: '+data.error,'bot');
+        }else{
+          addAIMsg('Oops! Try again.','bot');
+        }
+      }catch(err){
+        console.error('API Error:',err);
+        // Fallback when API fails
+        const fallbacks={
+          english:"For this topic: Read carefully, use examples, practice daily. Try asking: What is active voice? How do I write an essay?",
+          maths:"Formula reminder: Triangle area=½bh, Square root of 144=12, BODMAS: Brackets first. Try another question!",
+          science:"Key points: Cell is unit of life, H₂O is water, Newton is force. Ask about any topic!",
+          urdu:"پوچھیں: کوئی بھی سوال۔ مثال: square root کیا ہے؟"
+        };
+        addAIMsg(fallbacks[aiSubject] || 'Try again with internet!','bot');
+      }
+      document.getElementById('aiTyping').style.display='none';
+    }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Learning Assistant - Chatbot</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans', Arial, sans-serif; font-size: 14px; background: #f5f5f5; }
+  
+  /* Floating Chat Button */
+  .chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s;
+  }
+  .chat-toggle:hover { transform: scale(1.1); }
+  .chat-toggle::before {
+    content: '💬';
+    font-size: 28px;
+  }
+  
+  /* Chat Window */
+  .chat-window {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 380px;
+    height: 500px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  .chat-window.open { display: flex; }
+  
+  /* Chat Header */
+  .chat-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .chat-header h3 { font-size: 16px; }
+  .close-chat {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  /* Subject Selector */
+  .subject-select {
+    padding: 10px;
+    background: #f0f0f0;
+    border-bottom: 1px solid #ddd;
+  }
+  .subject-select select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+  }
+  
+  /* Messages Area */
+  .chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f9f9f9;
+  }
+  .message {
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border-radius: 15px;
+    max-width: 80%;
+    line-height: 1.5;
+  }
+  .message.user {
+    background: #667eea;
+    color: #fff;
+    margin-left: auto;
+    border-bottom-right-radius: 3px;
+  }
+  .message.bot {
+    background: #e8e8e8;
+    color: #333;
+    border-bottom-left-radius: 3px;
+  }
+  .message.error {
+    background: #ffcdd2;
+    color: #c62828;
+  }
+  
+  /* Typing Indicator */
+  .typing {
+    display: none;
+    padding: 10px 14px;
+    background: #e8e8e8;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    max-width: 80%;
+  }
+  .typing span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #666;
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: bounce 1.4s infinite ease-in-out;
+  }
+  .typing span:nth-child(1) { animation-delay: 0s; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+  }
+  
+  /* Input Area */
+  .chat-input {
+    padding: 12px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    gap: 8px;
+  }
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+  }
+  .chat-input input:focus { border-color: #667eea; }
+  .chat-input button {
+    padding: 10px 18px;
+    background: #667eea;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .chat-input button:hover { background: #5568d3; }
+  .chat-input button:disabled { background: #ccc; }
+  
+  @media (max-width: 420px) {
+    .chat-window { width: calc(100% - 40px); right: 20px; height: 450px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating Chat Button -->
+<div class="chat-toggle" onclick="toggleChat()"></div>
+
+<!-- Chat Window -->
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <h3>🤖 Learning Assistant</h3>
+    <button class="close-chat" onclick="toggleChat()">×</button>
+  </div>
+  
+  <div class="subject-select">
+    <select id="subjectSelect" onchange="changeSubject()">
+      <option value="comprehension">📖 Comprehension</option>
+      <option value="essay">📝 Essay Writing</option>
+      <option value="letter">✉️ Letter/Application</option>
+      <option value="idioms">📌 Idioms & Phrases</option>
+      <option value="verbs">🔄 Forms of Verb</option>
+      <option value="activepassive">🔀 Active/Passive Voice</option>
+      <option value="doasdirected">⚙️ Do as Directed</option>
+      <option value="transformation">🔃 Transformation</option>
+      <option value="maths">📐 Maths Topics</option>
+      <option value="science">🔬 Science Topics</option>
+    </select>
+  </div>
+  
+  <div class="chat-messages" id="chatMessages">
+    <div class="message bot">
+      👋 Hi! I'm your learning assistant. Select a subject above and ask me any question!
+    </div>
+  </div>
+  
+  <div class="typing" id="typing">
+    <span></span><span></span><span></span>
+  </div>
+  
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Ask a question..." onkeypress="handleKey(event)">
+    <button onclick="sendMessage()" id="sendBtn">Send</button>
+  </div>
+</div>
+
+<script>
+// Context Knowledge Base
+const knowledgeBase = {
+  comprehension: `You are a Comprehension expert for Class IX. Topics:
+- True/False questions based on passage
+- Short answer questions (Who, What, When, Where, Why, How)
+- Fill in the blanks
+- Vocabulary from context
+- How to answer: Read passage twice, find key words, answer from passage
+- Tips: Use the passage, don't add extra info, stay on topic`,
+  
+  essay: `You are an Essay Writing expert.Topics:
+- Essays need Introduction, Main Body, Conclusion
+- Use adjectives to describe (size, color, quality, quantity)
+- Keep 100-150 words for Class IX
+- Common topics: My School, My Best Friend, A Rainy Day
+- Format: 3 paragraphs minimum
+- Use 5-6 adjectives for better marks`,
+  
+  letter: `You are an Letter/Application expert.
+Formal Application format:
+- To, The Headmaster, [School Name]
+- Date, Subject line
+- Respected Sir/Madam, [body]
+- Thanking you, Yours faithfully, [Name], [Class]
+Informal Letter format:
+- [Address], [Date], Dear [Name], [body], Yours lovingly/sincerely
+Common topics: Leave application, Fee concession, Issue of book`,
+  
+  idioms: `You are an Idioms & Phrases expert.
+Common idioms and meanings:
+- At last = Finally
+- Back to square one = Start again
+- Bite the bullet = Face difficulty
+- Break the ice = Make first contact
+- Hit the nail on the head = Be exactly right
+- Kill two birds with one stone = Achieve two things at once
+- Piece of cake = Very easy
+- Rain cats and dogs = Rain heavily`,
+  
+  verbs: `You are a Verb Forms expert.
+Key irregular verbs:
+- Begin → Began → Begun
+- Bring → Brought → Brought
+- Do → Did → Done
+- Eat → Ate → Eaten
+- Go → Went → Gone
+- See → Saw → Seen
+- Take → Took → Taken
+- Write → Wrote → Written
+- Have → Had → Had
+- Make → Made → Made`,
+  
+  activepassive: `You are Active/Passive Voice expert.
+How to change:
+- Move object to subject position
+- Add is/am/are + past participle
+- Add "by" before agent
+Tense changes:
+- Simple Present: writes → is written
+- Simple Past: wrote → was written
+- Present Perfect: has written → has been written
+- Present Continuous: is writing → is being written`,
+  
+  doasdirected: `You are Do as Directed expert.
+Common directions:
+- Change to Plural: Add 's' or 'es' to noun
+- Change to Feminine: Change gender (boy→girl, he→she)
+- Change to Comparative: Add -er or use 'than'
+- Change to Superlative: Add -est or use 'most'
+- Change to Interrogative: Add 'do' question
+- Use "too" instead of "very": too + adjective + to`,
+  
+  transformation: `You are Sentence Transformation expert.
+Negative to Affirmative:
+- no + noun = not any
+- never = always (negative)
+- nobody = everybody (negative)
+- nothing = everything (negative)
+Degrees of Comparison:
+- Positive: He is tall
+- Comparative: He is taller than me
+- Superlative: He is the tallest`,
+  
+  maths: `You are a Maths expert for Class IX.
+Topics:
+- Square Root: √144=12, memorize squares 1-20
+- Factorization: 2x+4=2(x+2), x²-9=(x-3)(x+3)
+- Sets: A∪B (union), A∩B (intersection)
+- BODMAS: Brackets → Order → Divide → Multiply → Add → Subtract
+- Area: Triangle=½bh, Rectangle=lb, Circle=πr²
+- Volume: Cuboid=l×b×h, Cube=s³`,
+  
+  science: `You are a Science expert for Class IX.
+Biology:
+- Cell: Unit of life
+- Mitochondria: Powerhouse
+- Photosynthesis: CO₂+H₂O+Light→Glucose+O₂
+Chemistry:
+- H₂O: Water formula
+- Na: Sodium symbol
+- Rust: Iron oxide (Fe₂O₃)
+- Acid: turns litmus red
+Physics:
+- Newton: Unit of force
+- Energy: Ability to do work
+- Pressure: Force per unit area`
+};
+
+let currentSubject = 'comprehension';
+
+function toggleChat() {
+  document.getElementById('chatWindow').classList.toggle('open');
+}
+
+function changeSubject() {
+  currentSubject = document.getElementById('subjectSelect').value;
+  addMessage(`Topic changed to ${document.getElementById('subjectSelect').selectedOptions[0].text}`, 'bot');
+}
+
+function addMessage(text, type) {
+  const div = document.createElement('div');
+  div.className = 'message ' + type;
+  div.textContent = text;
+  document.getElementById('chatMessages').appendChild(div);
+  document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter') sendMessage();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const question = input.value.trim();
+  if (!question) return;
+  
+  addMessage(question, 'user');
+  input.value = '';
+  
+  // Show typing
+  document.getElementById('typing').style.display = 'block';
+  document.getElementById('sendBtn').disabled = true;
+  
+  try {
+    const response = await fetch('https://sodeom.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [{
+          role: 'system',
+          content: `You are a helpful Class IX learning assistant. ${knowledgeBase[currentSubject]} 
+          
+Answer questions about this topic. Keep answers short and clear for Class IX students.`
+        }, {
+          role: 'user',
+          content: question
+        }]
+      })
+    });
+    
+    const data = await response.json();
+    const answer = data.choices[0].message.content;
+    addMessage(answer, 'bot');
+  } catch (e) {
+    addMessage('⚠️ Sorry, something went wrong. Try again!', 'error');
+  }
+  
+  document.getElementById('typing').style.display = 'none';
+  document.getElementById('sendBtn').disabled = false;
+}
+</script>
+
+</body>
+</html>
